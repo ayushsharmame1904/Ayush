@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ayush Roast Page</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --glass: rgba(255,255,255,0.15);
+    --border: rgba(255,255,255,0.25);
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    font-family:'Poppins',sans-serif;
+    color:white;
+    background: linear-gradient(-45deg,#ff0080,#7928ca,#00c6ff,#00ff99);
+    background-size:400% 400%;
+    animation:bgMove 15s ease infinite;
+    position:relative;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.emojis{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
+}
+
+.emoji{
+    position:absolute;
+    font-size:2rem;
+    animation:float linear infinite;
+    opacity:.5;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(110vh) rotate(0deg);
+    }
+    to{
+        transform:translateY(-120vh) rotate(360deg);
+    }
+}
+
+.roast-level{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:1000;
+    padding:12px 18px;
+    border-radius:50px;
+    backdrop-filter:blur(15px);
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.25);
+    font-weight:700;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+    animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+}
+
+.container{
+    position:relative;
+    z-index:2;
+    width:min(1200px,92%);
+    margin:auto;
+    padding:80px 0;
+}
+
+.hero{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.glass{
+    background:var(--glass);
+    backdrop-filter:blur(20px);
+    border:1px solid var(--border);
+    border-radius:30px;
+    padding:35px;
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+.title{
+    font-family:'Fredoka',cursive;
+    font-size:clamp(3rem,8vw,6rem);
+    font-weight:700;
+    white-space:nowrap;
+    overflow:hidden;
+    border-right:4px solid white;
+    width:0;
+    margin:auto;
+    animation:typing 3s steps(5,end) forwards,
+              blink .8s infinite;
+}
+
+@keyframes typing{
+    from{width:0}
+    to{width:5ch}
+}
+
+@keyframes blink{
+    50%{border-color:transparent}
+}
+
+.subtitle{
+    margin-top:15px;
+    opacity:.9;
+    font-size:1.1rem;
+}
+
+.controls{
+    margin-top:25px;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+    padding:14px 28px;
+    border-radius:50px;
+    font-size:1rem;
+    font-weight:700;
+    color:white;
+    background:linear-gradient(135deg,#ff6b6b,#ff00cc,#7b61ff);
+    transition:.35s;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+button:hover{
+    transform:translateY(-4px) scale(1.05);
+}
+
+.roasts{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:22px;
+    margin-top:40px;
+}
+
+.card{
+    opacity:0;
+    transform:translateY(40px) scale(.95);
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:22px;
+    padding:22px;
+    transition:.35s;
+    position:relative;
+}
+
+.card.show{
+    animation:cardIn .7s forwards;
+}
+
+@keyframes cardIn{
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 20px 35px rgba(0,0,0,.25);
+}
+
+.card p{
+    line-height:1.7;
+    font-size:.98rem;
+}
+
+.reaction{
+    position:absolute;
+    top:12px;
+    right:15px;
+    font-size:1.6rem;
+    animation:wobble 2s infinite;
+}
+
+@keyframes wobble{
+    0%,100%{transform:rotate(0)}
+    25%{transform:rotate(-10deg)}
+    75%{transform:rotate(10deg)}
+}
+
+.footer{
+    text-align:center;
+    margin-top:60px;
+    padding:20px;
+    font-size:1rem;
+    font-weight:700;
+    opacity:.9;
+}
+
+.confetti{
+    position:fixed;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9999;
+    animation:explode 2s linear forwards;
+}
+
+@keyframes explode{
+    to{
+        transform:translate(var(--x),var(--y)) rotate(720deg);
+        opacity:0;
+    }
+}
+
+@media(max-width:600px){
+    .glass{
+        padding:25px;
+    }
+
+    .roast-level{
+        font-size:.8rem;
+        top:10px;
+        right:10px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="emojis" id="emojiContainer"></div>
+
+<div class="roast-level">
+🔥 Ayush Roast Level: 9999%
+</div>
+
+<div class="container">
+
+    <div class="hero glass">
+        <h1 class="title">Ayush</h1>
+        <p class="subtitle">
+            The Legend. The Mystery. The Walking Roast Target. 😂
+        </p>
+
+        <div class="controls">
+            <button id="funBtn">🎉 Increase Roast Power</button>
+        </div>
+    </div>
+
+    <section class="roasts" id="roastContainer"></section>
+
+    <footer class="footer">
+        🚀 Powered by Unlimited Confidence™
+    </footer>
+
+</div>
+
+<script>
+const roasts = [
+"Ayush, you're living proof that a person can have unlimited internet access and still know absolutely nothing useful.",
+"Your confidence is honestly inspiring. Most people need talent before acting that sure of themselves, but you've chosen to skip that requirement entirely.",
+"You don't lose arguments because you're wrong. You lose them because halfway through explaining your point, everyone forgets what you were trying to say.",
+"If procrastination paid money, you'd be richer than Elon Musk.",
+"You have two speeds: 'I'll do it later' and 'Oops, it's due in 5 minutes.'",
+"Your room looks like a crime scene where the victim was basic organization.",
+"When teachers say 'There are no stupid questions,' you're the reason they immediately regret saying it.",
+"You spend so much time thinking about becoming productive that being productive has become unnecessary.",
+"Your alarm clock deserves a bravery award for showing up every day despite knowing it'll be ignored.",
+"You have the unique ability to turn a 10-minute task into a weekend project.",
+"The funniest thing about you is that whenever something goes wrong, everyone looks at you first—not because they know you did it, but because the odds are pretty good.",
+"Your plans are like free trial subscriptions: they never last long enough to become useful.",
+"You talk about your future self as if he's a completely different person who's going to magically fix everything.",
+"If excuses were building materials, you could construct an entire city.",
+"You don't need enemies. Your own decisions keep you busy enough.",
+"Your attention span changes tabs faster than a gamer rage-quits a match.",
+"Every group needs that one person who has no idea what's happening but somehow survives anyway. Congratulations on filling that role perfectly.",
+"You bring people together because everyone can agree on one thing: 'Classic Ayush moment.'",
+"But to be fair, life would be a lot less entertaining without you. You're like a glitch in a video game—completely unnecessary, slightly concerning, but somehow part of the experience."
+];
+
+const reactions = ["😂","🤣","😎","🔥","✨","🎉","🤡","🚀","💀"];
+
+const roastContainer = document.getElementById("roastContainer");
+
+roasts.forEach((text,index)=>{
+    const card=document.createElement("div");
+    card.className="card";
+
+    const randomReaction =
+        Math.random() > 0.45
+        ? `<div class="reaction">${reactions[Math.floor(Math.random()*reactions.length)]}</div>`
+        : "";
+
+    card.innerHTML=`
+        ${randomReaction}
+        <p>${text}</p>
+    `;
+
+    roastContainer.appendChild(card);
+
+    setTimeout(()=>{
+        card.classList.add("show");
+    },300*index);
+});
+
+const emojiContainer=document.getElementById("emojiContainer");
+const floating=["😂","🤣","😎","🔥","✨","🎉","🤡","🚀","💀"];
+
+for(let i=0;i<45;i++){
+    const e=document.createElement("div");
+    e.className="emoji";
+    e.innerHTML=floating[Math.floor(Math.random()*floating.length)];
+
+    e.style.left=Math.random()*100+"%";
+    e.style.animationDuration=(10+Math.random()*15)+"s";
+    e.style.animationDelay=(-Math.random()*20)+"s";
+    e.style.fontSize=(20+Math.random()*30)+"px";
+
+    emojiContainer.appendChild(e);
+}
+
+document.getElementById("funBtn").addEventListener("click",()=>{
+    for(let i=0;i<140;i++){
+        const conf=document.createElement("div");
+        conf.className="confetti";
+
+        const colors=[
+            "#ff0080","#00ffff","#ffff00",
+            "#00ff99","#ff6600","#ffffff"
+        ];
+
+        conf.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+        conf.style.left=(window.innerWidth/2)+"px";
+        conf.style.top=(window.innerHeight/2)+"px";
+
+        conf.style.setProperty("--x",
+            (Math.random()*1000-500)+"px"
+        );
+
+        conf.style.setProperty("--y",
+            (Math.random()*1000-500)+"px"
+        );
+
+        document.body.appendChild(conf);
+
+        setTimeout(()=>conf.remove(),2000);
+    }
+});
+</script>
+
+</body>
+</html>
